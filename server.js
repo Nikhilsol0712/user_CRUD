@@ -2,10 +2,13 @@ const express = require("express");
 const { sequelize } = require("./models/index");
 //adding body-parser middleware , it helps the server to reads the data.
 const bodyParser = require("body-parser");
+const cors = require("cors");
 require("dotenv").config();
 const userRoutes = require("./routes/user.routes");
-const app = express();
 
+const app = express();
+app.use(cors());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", async (req, res) => res.send("<h1>hellow<h1>"));
 userRoutes(app);
